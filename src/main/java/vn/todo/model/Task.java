@@ -4,12 +4,8 @@ public class Task extends BaseEntity {
     private String title;
     private boolean isComplete;
 
-    public Task(String title) {
-        this(null, title, false);
-    }
-
-    public Task(Integer id, String title) {
-        this(id, title, false);
+    public Task(String title, boolean isComplete) {
+        this(null, title, isComplete);
     }
 
     public Task(Integer id, String title, boolean isComplete) {
@@ -32,5 +28,14 @@ public class Task extends BaseEntity {
 
     public void setComplete(boolean complete) {
         isComplete = complete;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", isComplete=" + isComplete +
+                '}';
     }
 }

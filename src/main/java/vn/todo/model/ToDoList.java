@@ -1,11 +1,8 @@
 package vn.todo.model;
 
-import java.util.List;
-
 public class ToDoList extends BaseEntity {
 
     private String title;
-    private List<Task> tasks;
 
     public ToDoList(String title) {
         this(null, title);
@@ -24,11 +21,11 @@ public class ToDoList extends BaseEntity {
         this.title = title;
     }
 
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
+    @Override
+    public String toString() {
+        return "ToDoList{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                '}';
     }
 }
