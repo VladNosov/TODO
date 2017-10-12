@@ -24,6 +24,9 @@ public class ToDoList extends AbstractBaseEntity {
     @NotNull
     private User user;
 
+    public ToDoList() {
+    }
+
     public ToDoList(String title) {
         this(null, title);
     }
