@@ -4,18 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import vn.todo.domain.Todo;
-import vn.todo.repository.ToDoListRepository;
+import vn.todo.repository.TodoRepository;
 import vn.todo.util.exceptions.NotFoundException;
 import java.util.List;
 import static vn.todo.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
-public class ToDoListServiceImpl implements ToDoListService {
+public class TodoServiceImpl implements TodoService {
 
-    private final ToDoListRepository repository;
+    private final TodoRepository repository;
 
     @Autowired
-    public ToDoListServiceImpl(ToDoListRepository repository) {
+    public TodoServiceImpl(TodoRepository repository) {
         this.repository = repository;
     }
 

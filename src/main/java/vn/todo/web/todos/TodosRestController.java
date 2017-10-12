@@ -8,19 +8,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vn.todo.AuthorizedUser;
 import vn.todo.domain.Todo;
-import vn.todo.service.ToDoListService;
+import vn.todo.service.TodoService;
 import static vn.todo.util.ValidationUtil.checkIdConsistent;
 import static vn.todo.util.ValidationUtil.checkNew;
 
 @Controller
 @RequestMapping("/todos")
-public class ToDoListRestController {
-    private static final Logger log = LoggerFactory.getLogger(ToDoListRestController.class);
+public class TodosRestController {
+    private static final Logger log = LoggerFactory.getLogger(TodosRestController.class);
 
-    private final ToDoListService service;
+    private final TodoService service;
 
     @Autowired
-    public ToDoListRestController(ToDoListService service) {
+    public TodosRestController(TodoService service) {
         this.service = service;
     }
 

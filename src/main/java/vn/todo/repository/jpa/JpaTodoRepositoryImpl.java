@@ -4,14 +4,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import vn.todo.domain.Todo;
 import vn.todo.domain.User;
-import vn.todo.repository.ToDoListRepository;
+import vn.todo.repository.TodoRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 @Transactional(readOnly = true)
-public class JpaToDoListRepositoryImpl implements ToDoListRepository {
+public class JpaTodoRepositoryImpl implements TodoRepository {
 
     @PersistenceContext
     private EntityManager em;
@@ -42,8 +42,8 @@ public class JpaToDoListRepositoryImpl implements ToDoListRepository {
 
     @Override
     public Todo get(int id, int userId) {
-        Todo meal = em.find(Todo.class, id);
-        return meal != null && meal.getUser().getId() == userId ? meal : null;
+        Todo todo = em.find(Todo.class, id);
+        return todo != null && todo.getUser().getId() == userId ? todo : null;
     }
 
     @Override

@@ -4,7 +4,7 @@ import vn.todo.domain.Todo;
 import vn.todo.util.exceptions.NotFoundException;
 import java.util.List;
 
-public interface ToDoListService {
+public interface TodoService {
     Todo update(Todo todo, int userId) throws NotFoundException;
 
     Todo create(Todo todo, int userId);

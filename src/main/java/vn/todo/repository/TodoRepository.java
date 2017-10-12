@@ -3,7 +3,7 @@ package vn.todo.repository;
 import vn.todo.domain.Todo;
 import java.util.List;
 
-public interface ToDoListRepository {
+public interface TodoRepository {
     Todo save(Todo todo, int userId);
 
     boolean delete(int id, int userId);
