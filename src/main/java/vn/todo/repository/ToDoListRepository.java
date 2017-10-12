@@ -1,6 +1,6 @@
 package vn.todo.repository;
 
-import vn.todo.model.ToDoList;
+import vn.todo.domain.ToDoList;
 import java.util.List;
 
 public interface ToDoListRepository {

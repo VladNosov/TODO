@@ -2,7 +2,8 @@ package vn.todo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import vn.todo.model.User;
+import org.springframework.util.Assert;
+import vn.todo.domain.User;
 import vn.todo.repository.UserRepository;
 import vn.todo.util.exceptions.NotFoundException;
 import java.util.List;
@@ -20,7 +21,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(User user) {
+    public User create(User user) {
+        Assert.notNull(user, "user must not be null");
         return repository.save(user);
     }
 
@@ -36,11 +38,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getByEmail(String email) throws NotFoundException {
+        Assert.notNull(email, "email must not be null");
         return checkNotFound(repository.getByEmail(email), "email=" + email);
     }
 
     @Override
     public void update(User user) {
+        Assert.notNull(user, "user must not be null");
         repository.save(user);
     }
 

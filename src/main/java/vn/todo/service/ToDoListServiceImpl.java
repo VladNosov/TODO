@@ -2,7 +2,8 @@ package vn.todo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import vn.todo.model.ToDoList;
+import org.springframework.util.Assert;
+import vn.todo.domain.ToDoList;
 import vn.todo.repository.ToDoListRepository;
 import vn.todo.util.exceptions.NotFoundException;
 import java.util.List;
@@ -24,7 +25,8 @@ public class ToDoListServiceImpl implements ToDoListService {
     }
 
     @Override
-    public ToDoList save(ToDoList toDoList, int userId) {
+    public ToDoList create(ToDoList toDoList, int userId) {
+        Assert.notNull(toDoList, "todos must not be null");
         return repository.save(toDoList, userId);
     }
 

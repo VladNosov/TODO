@@ -1,6 +1,6 @@
 package vn.todo.util;
 
-import vn.todo.model.BaseEntity;
+import vn.todo.domain.AbstractBaseEntity;
 import vn.todo.util.exceptions.NotFoundException;
 
 public class ValidationUtil {
@@ -27,13 +27,13 @@ public class ValidationUtil {
         }
     }
 
-    public static void checkNew(BaseEntity entity) {
+    public static void checkNew(AbstractBaseEntity entity) {
         if (!entity.isNew()) {
             throw new IllegalArgumentException(entity + " must be new (id=null)");
         }
     }
 
-    public static void checkIdConsistent(BaseEntity entity, int id) {
+    public static void checkIdConsistent(AbstractBaseEntity entity, int id) {
         if (entity.isNew()) {
             entity.setId(id);
         } else if (entity.getId() != id) {

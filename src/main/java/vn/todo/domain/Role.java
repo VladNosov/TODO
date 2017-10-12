@@ -1,4 +1,4 @@
-package vn.todo.model;
+package vn.todo.domain;
 
 public enum Role {
     ROLE_USER,

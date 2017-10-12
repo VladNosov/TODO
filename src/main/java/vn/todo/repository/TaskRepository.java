@@ -1,6 +1,6 @@
 package vn.todo.repository;
 
-import vn.todo.model.Task;
+import vn.todo.domain.Task;
 import java.util.Collection;
 
 public interface TaskRepository {

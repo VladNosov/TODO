@@ -1,8 +1,24 @@
-package vn.todo.model;
+package vn.todo.domain;
 
-public class Task extends BaseEntity {
+import org.hibernate.validator.constraints.NotBlank;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "tasks")
+public class Task extends AbstractBaseEntity {
+
+    @Column(name = "title", nullable = false)
+    @NotBlank
     private String title;
+
+    @Column(name = "complete", nullable = false, columnDefinition = "bool default false")
     private boolean isComplete;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "todo_id", nullable = false)
+    @NotNull
+    private ToDoList todo;
 
     public Task(String title, boolean isComplete) {
         this(null, title, isComplete);
@@ -28,6 +44,14 @@ public class Task extends BaseEntity {
 
     public void setComplete(boolean complete) {
         isComplete = complete;
+    }
+
+    public ToDoList getTodo() {
+        return todo;
+    }
+
+    public void setTodo(ToDoList todo) {
+        this.todo = todo;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package vn.todo.repository;
 
-import vn.todo.model.User;
+import vn.todo.domain.User;
 import java.util.List;
 
 public interface UserRepository {

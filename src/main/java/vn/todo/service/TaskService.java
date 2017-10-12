@@ -1,6 +1,6 @@
 package vn.todo.service;
 
-import vn.todo.model.Task;
+import vn.todo.domain.Task;
 import java.util.List;
 
 public interface TaskService {
