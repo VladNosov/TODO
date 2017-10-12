@@ -3,7 +3,7 @@ package vn.todo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import vn.todo.domain.ToDoList;
+import vn.todo.domain.Todo;
 import vn.todo.repository.ToDoListRepository;
 import vn.todo.util.exceptions.NotFoundException;
 import java.util.List;
@@ -20,14 +20,14 @@ public class ToDoListServiceImpl implements ToDoListService {
     }
 
     @Override
-    public ToDoList update(ToDoList toDoList, int userId) throws NotFoundException {
-        return checkNotFoundWithId(repository.save(toDoList, userId), toDoList.getId());
+    public Todo update(Todo todo, int userId) throws NotFoundException {
+        return checkNotFoundWithId(repository.save(todo, userId), todo.getId());
     }
 
     @Override
-    public ToDoList create(ToDoList toDoList, int userId) {
-        Assert.notNull(toDoList, "todos must not be null");
-        return repository.save(toDoList, userId);
+    public Todo create(Todo todo, int userId) {
+        Assert.notNull(todo, "todos must not be null");
+        return repository.save(todo, userId);
     }
 
     @Override
@@ -36,12 +36,12 @@ public class ToDoListServiceImpl implements ToDoListService {
     }
 
     @Override
-    public ToDoList get(int id, int userId) throws NotFoundException {
+    public Todo get(int id, int userId) throws NotFoundException {
         return checkNotFoundWithId(repository.get(id, userId), id);
     }
 
     @Override
-    public List<ToDoList> getAll(int userId) {
+    public List<Todo> getAll(int userId) {
         return repository.getAll(userId);
     }
 }

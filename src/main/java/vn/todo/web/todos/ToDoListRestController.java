@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vn.todo.AuthorizedUser;
-import vn.todo.domain.ToDoList;
+import vn.todo.domain.Todo;
 import vn.todo.service.ToDoListService;
 import static vn.todo.util.ValidationUtil.checkIdConsistent;
 import static vn.todo.util.ValidationUtil.checkNew;
@@ -41,27 +41,27 @@ public class ToDoListRestController {
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String update(@RequestParam(name = "id") int id, Model model) {
         int userId = AuthorizedUser.id();
-        final ToDoList toDoList = service.get(id, userId);
-        model.addAttribute("todo", toDoList);
+        final Todo todo = service.get(id, userId);
+        model.addAttribute("todo", todo);
         return "redirect:/todo/update";
     }
 
     //==================================================================================================================
 
-    public ToDoList get(int id) {
+    public Todo get(int id) {
         int userId = AuthorizedUser.id();
         return service.get(id, userId);
     }
 
-    public ToDoList create(ToDoList toDoList) {
+    public Todo create(Todo todo) {
         int userId = AuthorizedUser.id();
-        checkNew(toDoList);
-        return service.create(toDoList, userId);
+        checkNew(todo);
+        return service.create(todo, userId);
     }
 
-    public void update(ToDoList toDoList, int id) {
+    public void update(Todo todo, int id) {
         int userId = AuthorizedUser.id();
-        checkIdConsistent(toDoList, id);
-        service.update(toDoList, userId);
+        checkIdConsistent(todo, id);
+        service.update(todo, userId);
     }
 }

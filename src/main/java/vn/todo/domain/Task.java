@@ -18,7 +18,7 @@ public class Task extends AbstractBaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "todo_id", nullable = false)
     @NotNull
-    private ToDoList todo;
+    private Todo todo;
 
     public Task(String title, boolean isComplete) {
         this(null, title, isComplete);
@@ -46,11 +46,11 @@ public class Task extends AbstractBaseEntity {
         isComplete = complete;
     }
 
-    public ToDoList getTodo() {
+    public Todo getTodo() {
         return todo;
     }
 
-    public void setTodo(ToDoList todo) {
+    public void setTodo(Todo todo) {
         this.todo = todo;
     }
 

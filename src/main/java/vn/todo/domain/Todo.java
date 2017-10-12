@@ -6,12 +6,12 @@ import javax.validation.constraints.NotNull;
 
 @SuppressWarnings("JpaQlInspection")
 @NamedQueries({
-        @NamedQuery(name = ToDoList.ALL_SORTED, query = "SELECT t FROM ToDoList t WHERE t.user.id=:userId ORDER BY t.title DESC"),
-        @NamedQuery(name = ToDoList.DELETE, query = "DELETE FROM ToDoList t WHERE t.id=:id AND t.user.id=:userId"),
+        @NamedQuery(name = Todo.ALL_SORTED, query = "SELECT t FROM Todo t WHERE t.user.id=:userId ORDER BY t.title DESC"),
+        @NamedQuery(name = Todo.DELETE, query = "DELETE FROM Todo t WHERE t.id=:id AND t.user.id=:userId"),
 })
 @Entity
 @Table(name = "todos")
-public class ToDoList extends AbstractBaseEntity {
+public class Todo extends AbstractBaseEntity {
     public static final String ALL_SORTED = "Meal.getAll";
     public static final String DELETE = "Meal.delete";
 
@@ -24,14 +24,14 @@ public class ToDoList extends AbstractBaseEntity {
     @NotNull
     private User user;
 
-    public ToDoList() {
+    public Todo() {
     }
 
-    public ToDoList(String title) {
+    public Todo(String title) {
         this(null, title);
     }
 
-    public ToDoList(Integer id, String title) {
+    public Todo(Integer id, String title) {
         super(id);
         this.title = title;
     }
@@ -54,7 +54,7 @@ public class ToDoList extends AbstractBaseEntity {
 
     @Override
     public String toString() {
-        return "ToDoList{" +
+        return "Todo{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 '}';

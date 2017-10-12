@@ -1,14 +1,14 @@
 package vn.todo.repository;
 
-import vn.todo.domain.ToDoList;
+import vn.todo.domain.Todo;
 import java.util.List;
 
 public interface ToDoListRepository {
-    ToDoList save(ToDoList toDoList, int userId);
+    Todo save(Todo todo, int userId);
 
     boolean delete(int id, int userId);
 
-    ToDoList get(int id, int userId);
+    Todo get(int id, int userId);
 
-    List<ToDoList> getAll(int userId);
+    List<Todo> getAll(int userId);
 }
