@@ -16,5 +16,7 @@ public interface UserService {
 
     void update(User user);
 
+    void evictCache();
+
     List<User> getAll();
 }

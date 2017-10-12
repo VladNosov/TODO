@@ -7,10 +7,10 @@
 </head>
 <body>
 <section>
-    <h3><a href="index.html">Home</a></h3>
+    <h3><a href="/">Home</a></h3>
     <h2>TODO's</h2>
     <hr/>
-    <a href="todos?action=create">Add TODO</a>
+    <a href="todos/create">Add TODO</a>
     <hr/>
     <table border="0" cellpadding="8" cellspacing="0">
         <thead>

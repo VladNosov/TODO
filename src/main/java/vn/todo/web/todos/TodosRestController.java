@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import vn.todo.AuthorizedUser;
 import vn.todo.domain.Todo;
 import vn.todo.service.TodoService;
-import static vn.todo.util.ValidationUtil.checkIdConsistent;
+import java.util.List;
+import java.util.Map;
+import static vn.todo.util.ValidationUtil.assureIdConsistent;
 import static vn.todo.util.ValidationUtil.checkNew;
 
 @Controller
@@ -26,42 +28,74 @@ public class TodosRestController {
 
     @GetMapping()
     public String todos(Model model) {
-        int userId = AuthorizedUser.id();
-        model.addAttribute("todos", service.getAll(userId));
+        model.addAttribute("todos", getAll());
         return "todos";
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String delete(@RequestParam(name = "id") int id) {
-        int userId = AuthorizedUser.id();
-        service.delete(id, userId);
+    public String deleteTodo(@RequestParam(name = "id") int id) {
+        delete(id);
         return "redirect:/todos";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
-    public String update(@RequestParam(name = "id") int id, Model model) {
-        int userId = AuthorizedUser.id();
-        final Todo todo = service.get(id, userId);
+    public String updateTodo(@RequestParam(name = "id") int id, Model model) {
+        final Todo todo = get(id);
         model.addAttribute("todo", todo);
-        return "redirect:/todo/update";
+        return "todoForm";
     }
 
-    //==================================================================================================================
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public String createTodo(Model model) {
+        final Todo todo = new Todo("");
+        model.addAttribute("todo", todo);
+        return "todoForm";
+    }
 
-    public Todo get(int id) {
+    @PostMapping
+    public String doPost(@RequestParam(name = "action", required = false) String action, @RequestParam Map<String, String> params) {
+        if (action == null) {
+            final Todo todo = new Todo(params.get("title"));
+            if (params.get("id").isEmpty()) {
+                create(todo);
+            } else {
+                update(todo, Integer.parseInt(params.get("id")));
+            }
+        }
+        return "redirect:/todos";
+    }
+
+    //======================================= private method ===========================================================
+
+    private Todo get(int id) {
         int userId = AuthorizedUser.id();
+        log.info("get todo {} for userId={}", id, userId);
         return service.get(id, userId);
     }
 
-    public Todo create(Todo todo) {
+    private void delete(int id) {
         int userId = AuthorizedUser.id();
+        log.info("delete todo {} for userId={}", id, userId);
+        service.delete(id, userId);
+    }
+
+    private List<Todo> getAll() {
+        int userId = AuthorizedUser.id();
+        log.info("getAll for userId={}", userId);
+        return service.getAll(userId);
+    }
+
+    private Todo create(Todo todo) {
+        int userId = AuthorizedUser.id();
+        log.info("create {} for userId={}", todo, userId);
         checkNew(todo);
         return service.create(todo, userId);
     }
 
-    public void update(Todo todo, int id) {
+    private void update(Todo todo, int id) {
         int userId = AuthorizedUser.id();
-        checkIdConsistent(todo, id);
+        log.info("update {} with id={} for userId={}", todo, id, userId);
+        assureIdConsistent(todo, id);
         service.update(todo, userId);
     }
 }

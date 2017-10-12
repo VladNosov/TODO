@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import vn.todo.domain.User;
 import vn.todo.service.UserService;
 import java.util.List;
-import static vn.todo.util.ValidationUtil.checkIdConsistent;
-import static vn.todo.util.ValidationUtil.checkNew;
+import static vn.todo.util.ValidationUtil.*;
 
 public abstract class AbstractUserController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
@@ -38,7 +37,7 @@ public abstract class AbstractUserController {
 
     public void update(User user, int id) {
         log.info("update {} with id={}", user, id);
-        checkIdConsistent(user, id);
+        assureIdConsistent(user, id);
         service.update(user);
     }
 
