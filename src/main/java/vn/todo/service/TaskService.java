@@ -26,4 +26,6 @@ public interface TaskService {
      * @return task ordered by id and isComplete;
      */
     List<Task> getAll(int todoId);
+
+    Task getWithTodo(int id, int todoId);
 }

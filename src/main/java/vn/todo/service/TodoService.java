@@ -14,4 +14,6 @@ public interface TodoService {
     Todo get(int id, int userId) throws NotFoundException;
 
     List<Todo> getAll(int userId);
+
+    Todo getWithUser(int id, int userId);
 }

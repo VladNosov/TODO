@@ -11,4 +11,8 @@ public interface TodoRepository {
     Todo get(int id, int userId);
 
     List<Todo> getAll(int userId);
+
+    default Todo getWithUser(int id, int userId) {
+        throw new UnsupportedOperationException();
+    }
 }

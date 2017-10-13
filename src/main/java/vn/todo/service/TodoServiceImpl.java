@@ -44,4 +44,9 @@ public class TodoServiceImpl implements TodoService {
     public List<Todo> getAll(int userId) {
         return repository.getAll(userId);
     }
+
+    @Override
+    public Todo getWithUser(int id, int userId) {
+        return checkNotFoundWithId(repository.getWithUser(id, userId), id);
+    }
 }

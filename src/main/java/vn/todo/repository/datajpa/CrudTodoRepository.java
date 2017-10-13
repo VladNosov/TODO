@@ -20,4 +20,7 @@ public interface CrudTodoRepository extends JpaRepository<Todo, Integer> {
 
     @Query("SELECT t FROM Todo t WHERE t.user.id=:userId ORDER BY t.title DESC")
     List<Todo> getAll(@Param("userId") int userId);
+
+    @Query("SELECT t FROM Todo t JOIN FETCH t.user WHERE t.id = ?1 and t.user.id = ?2")
+    Todo getWithUser(int id, int userId);
 }

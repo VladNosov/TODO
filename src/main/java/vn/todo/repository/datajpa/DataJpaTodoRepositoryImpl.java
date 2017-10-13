@@ -43,4 +43,9 @@ public class DataJpaTodoRepositoryImpl implements TodoRepository {
     public List<Todo> getAll(int userId) {
         return crudTodoRepository.getAll(userId);
     }
+
+    @Override
+    public Todo getWithUser(int id, int userId) {
+        return crudTodoRepository.getWithUser(id, userId);
+    }
 }

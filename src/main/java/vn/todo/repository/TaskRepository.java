@@ -11,4 +11,8 @@ public interface TaskRepository {
     Task get(int id, int todoId);
 
     List<Task> getAll(int todoId);
+
+    default Task getWithTodo(int id, int todoId) {
+        throw new UnsupportedOperationException();
+    }
 }

@@ -44,4 +44,9 @@ public class TaskServiceImpl implements TaskService {
     public List<Task> getAll(int todoId) {
         return repository.getAll(todoId);
     }
+
+    @Override
+    public Task getWithTodo(int id, int todoId) {
+        return checkNotFoundWithId(repository.getWithTodo(id, todoId), id);
+    }
 }

@@ -19,4 +19,6 @@ public interface UserService {
     void evictCache();
 
     List<User> getAll();
+
+    User getWithTodos(int id);
 }

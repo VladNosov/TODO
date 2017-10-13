@@ -43,4 +43,9 @@ public class DataJpaTaskRepositoryImpl implements TaskRepository {
     public List<Task> getAll(int todoId) {
         return crudTaskRepository.getAll(todoId);
     }
+
+    @Override
+    public Task getWithTodo(int id, int todoId) {
+        return crudTaskRepository.getWithTodo(id, todoId);
+    }
 }
