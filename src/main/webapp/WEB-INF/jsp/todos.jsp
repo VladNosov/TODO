@@ -21,7 +21,7 @@
         <c:forEach items="${todos}" var="todo">
             <jsp:useBean id="todo" type="vn.todo.domain.Todo"/>
             <tr class="exceeded">
-                <td>${todo.title}</td>
+                <td><a href="/todo?id=${todo.id}">${todo.title}</a></td>
                 <td><a href="todos/update?id=${todo.id}">Update</a></td>
                 <td><a href="todos/delete?id=${todo.id}">Delete</a></td>
             </tr>

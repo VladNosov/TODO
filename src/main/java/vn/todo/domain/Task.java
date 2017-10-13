@@ -13,12 +13,16 @@ public class Task extends AbstractBaseEntity {
     private String title;
 
     @Column(name = "complete", nullable = false, columnDefinition = "bool default false")
-    private boolean isComplete;
+    @NotNull
+    private Boolean isComplete;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "todo_id", nullable = false)
     @NotNull
     private Todo todo;
+
+    public Task() {
+    }
 
     public Task(String title, boolean isComplete) {
         this(null, title, isComplete);

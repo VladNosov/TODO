@@ -36,6 +36,6 @@ CREATE TABLE tasks (
   id          INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   todo_id     INTEGER             NOT NULL,
   title       TEXT                NOT NULL,
-  enabled     BOOL DEFAULT TRUE   NOT NULL,
+  complete     BOOL DEFAULT TRUE   NOT NULL,
   FOREIGN KEY (todo_id) REFERENCES todos (id) ON DELETE CASCADE
 );

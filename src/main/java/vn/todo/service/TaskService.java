@@ -1,26 +1,29 @@
 package vn.todo.service;
 
 import vn.todo.domain.Task;
+import vn.todo.util.exceptions.NotFoundException;
 import java.util.List;
 
 public interface TaskService {
-    /**
-     * @return null if updated task do not belong to toDoListId
-     */
-    Task save(Task task, int toDoListId);
+    Task create(Task task, int todoId);
 
     /**
-     * @return false if task do not belong to toDoListId
+     * @return null if updated task do not belong to todo
      */
-    boolean delete(int id, int toDoListId);
+    Task update(Task task, int todoId) throws NotFoundException;
 
     /**
-     * @return null if task do not belong to toDoListId
+     * @return false if task do not belong to todo
      */
-    Task get(int id, int toDoListId);
+    void delete(int id, int todoId) throws NotFoundException;
+
+    /**
+     * @return null if task do not belong to todo
+     */
+    Task get(int id, int todoId) throws NotFoundException;
 
     /**
      * @return task ordered by id and isComplete;
      */
-    List<Task> getAll(int toDoListId);
+    List<Task> getAll(int todoId);
 }

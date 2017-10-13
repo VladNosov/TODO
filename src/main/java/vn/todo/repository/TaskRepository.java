@@ -1,14 +1,14 @@
 package vn.todo.repository;
 
 import vn.todo.domain.Task;
-import java.util.Collection;
+import java.util.List;
 
 public interface TaskRepository {
-    Task save(Task task);
+    Task save(Task task, int todoId);
 
-    void delete(int id);
+    boolean delete(int id, int todoId);
 
-    Task get(int id);
+    Task get(int id, int todoId);
 
-    Collection<Task> getAll();
+    List<Task> getAll(int todoId);
 }

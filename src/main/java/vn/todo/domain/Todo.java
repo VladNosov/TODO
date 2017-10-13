@@ -4,16 +4,9 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@SuppressWarnings("JpaQlInspection")
-@NamedQueries({
-        @NamedQuery(name = Todo.ALL_SORTED, query = "SELECT t FROM Todo t WHERE t.user.id=:userId ORDER BY t.title DESC"),
-        @NamedQuery(name = Todo.DELETE, query = "DELETE FROM Todo t WHERE t.id=:id AND t.user.id=:userId"),
-})
 @Entity
 @Table(name = "todos")
 public class Todo extends AbstractBaseEntity {
-    public static final String ALL_SORTED = "Meal.getAll";
-    public static final String DELETE = "Meal.delete";
 
     @Column(name = "title", nullable = false)
     @NotBlank

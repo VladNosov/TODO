@@ -19,3 +19,9 @@ INSERT INTO todos (title, user_id) VALUES
   ('Не проспи', 100000),
   ('Пиши код', 100000),
   ('Ты не должен это видеть', 100001);
+
+INSERT INTO tasks (title, complete, todo_id) VALUES
+  ('Задача 1', TRUE ,100003),
+  ('Задача 2', FALSE, 100003),
+  ('Задача 3', FALSE, 100003),
+  ('Задача админа 1', FALSE, 100004);
