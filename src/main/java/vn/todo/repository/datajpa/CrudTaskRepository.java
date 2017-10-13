@@ -21,6 +21,6 @@ public interface CrudTaskRepository extends JpaRepository<Task, Integer> {
     @Query("SELECT t FROM Task t WHERE t.todo.id=:todoId ORDER BY t.title DESC")
     List<Task> getAll(@Param("todoId") int todoId);
 
-    @Query("SELECT t FROM Task t JOIN FETCH t.user WHERE t.id = ?1 and t.todo.id = ?2")
-    Task getWithTodo(int id, int userId);
+    @Query("SELECT t FROM Task t JOIN FETCH t.todo WHERE t.id = ?1 and t.todo.id = ?2")
+    Task getWithTodo(int id, int todoId);
 }
