@@ -25,4 +25,7 @@
            diskPersistent="false"
            diskExpiryThreadIntervalSeconds="1"
            memoryStoreEvictionPolicy="LRU"/>
+
+    <cache name="vn.todo.domain.User"
+           maxElementsInMemory="25000"/>
 </ehcache>
