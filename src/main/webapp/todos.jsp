@@ -1,5 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
     <title>TODO's</title>
@@ -7,8 +9,7 @@
 </head>
 <body>
 <section>
-    <h3><a href="/">Home</a></h3>
-    <h2>TODO's</h2>
+    <h3>TODO's</h3>
     <hr/>
     <a href="todos/create">Add TODO</a>
     <hr/>
@@ -16,6 +17,7 @@
         <thead>
         <tr>
             <th>Title</th>
+            <th colspan="2">Action</th>
         </tr>
         </thead>
         <c:forEach items="${todos}" var="todo">
