@@ -15,17 +15,17 @@ dd {
     vertical-align: top;
 }
 
-.normal {
+.green {
     color: green;
 }
 
-.exceeded {
+.red {
     color: red;
 }
 
 header, footer {
-    background: none repeat scroll 0 0 #A6C9E2;
-    color: #2E6E9E;
+    background: none repeat scroll 0 0 #27aa80;
+    color: #e5e6e8;
     font-size: 20px;
     padding: 5px 20px;
     margin: 6px 0;

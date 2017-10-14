@@ -16,7 +16,7 @@
     </form>
     <ul>
         <li><a href="users"><spring:message code="user.title"/></a></li>
-        <li><a href="meals"><spring:message code="todo.title"/></a></li>
+        <li><a href="meals"><spring:message code="todo.description"/></a></li>
     </ul>
 </section>
 <jsp:include page="fragments/footer.jsp"/>

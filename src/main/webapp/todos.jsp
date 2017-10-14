@@ -1,34 +1,33 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <html>
-<head>
-    <title>TODO's</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+<jsp:include page="fragments/headTag.jsp"/>
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 <section>
-    <h3>TODO's</h3>
+    <h3><spring:message code="todo.title"/></h3>
     <hr/>
-    <a href="todos/create">Add TODO</a>
+    <a href="todos/create"><spring:message code="todo.add"/></a>
     <hr/>
     <table border="0" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
-            <th>Title</th>
-            <th colspan="2">Action</th>
+            <th><spring:message code="todo.description"/></th>
+            <th colspan="2"><spring:message code="common.actions"/></th>
         </tr>
         </thead>
         <c:forEach items="${todos}" var="todo">
             <jsp:useBean id="todo" type="vn.todo.domain.Todo"/>
-            <tr class="exceeded">
-                <td><a href="/todo?id=${todo.id}">${todo.title}</a></td>
-                <td><a href="todos/update?id=${todo.id}">Update</a></td>
-                <td><a href="todos/delete?id=${todo.id}">Delete</a></td>
+            <tr>
+                <td><a href="/todo/${todo.id}/">${todo.title}</a></td>
+                <td class="green"><a href="todos/update?id=${todo.id}"><spring:message code="common.update"/></a></td>
+                <td class="red"><a href="todos/delete?id=${todo.id}"><spring:message code="common.delete"/></a></td>
             </tr>
         </c:forEach>
     </table>
 </section>
+<jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>
