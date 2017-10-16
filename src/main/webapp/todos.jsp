@@ -5,29 +5,70 @@
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
 <body>
+<script type="text/javascript" src="/js/datatablesUtil.js" defer></script>
+<script type="text/javascript" src="/js/todoDatatables.js" defer></script>
 <jsp:include page="fragments/bodyHeader.jsp"/>
-<section>
-    <h3><spring:message code="todo.title"/></h3>
-    <hr/>
-    <a href="todos/create"><spring:message code="todo.add"/></a>
-    <hr/>
-    <table border="0" cellpadding="8" cellspacing="0">
-        <thead>
-        <tr>
-            <th><spring:message code="todo.description"/></th>
-            <th colspan="2"><spring:message code="common.actions"/></th>
-        </tr>
-        </thead>
-        <c:forEach items="${todos}" var="todo">
-            <jsp:useBean id="todo" type="vn.todo.domain.Todo"/>
+
+<div class="jumbotron">
+    <div class="container">
+        <h3><spring:message code="todo.title"/></h3>
+        <br/>
+        <a class="btn btn-primary" onclick="add()">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <spring:message code="common.add"/>
+        </a>
+        <table class="table table-striped display" id="datatable">
+            <thead>
             <tr>
-                <td><a href="/todo/${todo.id}/">${todo.title}</a></td>
-                <td class="green"><a href="todos/update?id=${todo.id}"><spring:message code="common.update"/></a></td>
-                <td class="red"><a href="todos/delete?id=${todo.id}"><spring:message code="common.delete"/></a></td>
+                <th><spring:message code="todo.description"/></th>
+                <th></th>
+                <th></th>
             </tr>
-        </c:forEach>
-    </table>
-</section>
+            </thead>
+            <c:forEach items="${todos}" var="todo">
+                <jsp:useBean id="todo" scope="page" type="vn.todo.domain.Todo"/>
+                <tr>
+                    <td><a href="${todo.id}" class="navbar-brand tabl">${todo.title}</a></td>
+                    <td><a><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+                    <td><a onclick="deleteRow(${todo.id})"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="editRow">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h2 class="modal-title" id="modalTitle"><spring:message code="todo.add"/></h2>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="detailsForm">
+                    <input type="hidden" id="id" name="id">
+
+                    <div class="form-group">
+                        <label for="title" class="control-label col-xs-3"><spring:message
+                                code="todo.description"/></label>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="title" name="title"
+                                   placeholder="<spring:message code="todo.description"/>">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-offset-3 col-xs-9">
+                            <button class="btn btn-primary" type="button" onclick="save()">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>
