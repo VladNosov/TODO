@@ -21,7 +21,7 @@ function enable(chkbox, id) {
         type: "POST",
         data: "enabled=" + enabled,
         success: function () {
-            successNoty(enabled ? "Enabled" : "Disabled");
+            successNoty(enabled ? "common.enabled" : "common.disabled");
         },
         error: function () {
             $(chkbox).prop("checked", !enabled);
