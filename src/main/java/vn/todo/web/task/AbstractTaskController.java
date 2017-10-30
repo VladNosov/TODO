@@ -41,4 +41,9 @@ public abstract class AbstractTaskController {
         assureIdConsistent(todo, taskId);
         service.update(todo, todoId);
     }
+
+    public void complete(int todoId, int taskId, boolean enabled) {
+        log.info((enabled ? "enable " : "disable ") + taskId);
+        service.complete(todoId, taskId, enabled);
+    }
 }

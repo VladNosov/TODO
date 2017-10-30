@@ -28,7 +28,7 @@
             <c:forEach items="${todos}" var="todo">
                 <jsp:useBean id="todo" scope="page" type="vn.todo.domain.Todo"/>
                 <tr>
-                    <td><a href="${todo.id}" class="navbar-brand tabl">${todo.title}</a></td>
+                    <td><a href="todo/${todo.id}/" class="navbar-brand tabl">${todo.title}</a></td>
                     <td><a><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
                     <td><a onclick="deleteRow(${todo.id})"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
                 </tr>

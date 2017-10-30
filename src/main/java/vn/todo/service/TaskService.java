@@ -28,4 +28,6 @@ public interface TaskService {
     List<Task> getAll(int todoId);
 
     Task getWithTodo(int id, int todoId);
+
+    void complete(int todoId, int taskId, boolean enable);
 }
