@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import vn.todo.domain.Todo;
+import vn.todo.to.TodoTo;
 import java.net.URI;
 import java.util.List;
 
@@ -33,8 +34,8 @@ public class TodoRestController extends AbstractTodoController {
 
     @Override
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody Todo meal, @PathVariable("id") int id) {
-        super.update(meal, id);
+    public void update(@RequestBody TodoTo todoTo, @PathVariable("id") int id) {
+        super.update(todoTo, id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

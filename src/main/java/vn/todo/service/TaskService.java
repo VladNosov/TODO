@@ -1,6 +1,7 @@
 package vn.todo.service;
 
 import vn.todo.domain.Task;
+import vn.todo.to.TaskTo;
 import vn.todo.util.exceptions.NotFoundException;
 import java.util.List;
 
@@ -11,6 +12,11 @@ public interface TaskService {
      * @return null if updated task do not belong to todo
      */
     Task update(Task task, int todoId) throws NotFoundException;
+
+    /**
+     * @return null if updated task do not belong to todo
+     */
+    Task update(TaskTo task, int todoId) throws NotFoundException;
 
     /**
      * @return false if task do not belong to todo

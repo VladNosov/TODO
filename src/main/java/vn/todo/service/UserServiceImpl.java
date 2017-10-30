@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import vn.todo.domain.User;
 import vn.todo.repository.UserRepository;
+import vn.todo.to.UserTo;
+import vn.todo.util.UserUtil;
 import vn.todo.util.exceptions.NotFoundException;
 import java.util.List;
 import static vn.todo.util.ValidationUtil.checkNotFound;
@@ -52,6 +54,14 @@ public class UserServiceImpl implements UserService {
     public void update(User user) {
         Assert.notNull(user, "user must not be null");
         repository.save(user);
+    }
+
+    @CacheEvict(value = "users", allEntries = true)
+    @Transactional
+    @Override
+    public void update(UserTo userTo) {
+        User user = get(userTo.getId());
+        repository.save(UserUtil.updateFromTo(user, userTo));
     }
 
     @CacheEvict(value = "users", allEntries = true)

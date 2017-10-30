@@ -1,11 +1,14 @@
 package vn.todo.service;
 
 import vn.todo.domain.Todo;
+import vn.todo.to.TodoTo;
 import vn.todo.util.exceptions.NotFoundException;
 import java.util.List;
 
 public interface TodoService {
     Todo update(Todo todo, int userId) throws NotFoundException;
+
+    Todo update(TodoTo todo, int userId) throws NotFoundException;
 
     Todo create(Todo todo, int userId);
 

@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import vn.todo.AuthorizedUser;
 import vn.todo.domain.Todo;
 import vn.todo.service.TodoService;
+import vn.todo.to.TodoTo;
 import java.util.List;
-import static vn.todo.util.ValidationUtil.assureIdConsistent;
-import static vn.todo.util.ValidationUtil.checkNew;
+import static vn.todo.util.ValidationUtil.*;
 
 public abstract class AbstractTodoController {
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -46,5 +46,12 @@ public abstract class AbstractTodoController {
         log.info("update {} with id={} for userId={}", todo, id, userId);
         assureIdConsistent(todo, id);
         service.update(todo, userId);
+    }
+
+    public void update(TodoTo todoTo, int id) {
+        int userId = AuthorizedUser.id();
+        log.info("update {} with id={}", todoTo, id);
+        assureIdConsistent(todoTo, id);
+        service.update(todoTo, userId);
     }
 }

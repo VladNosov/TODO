@@ -26,15 +26,6 @@
                 <th></th>
             </tr>
             </thead>
-            <c:forEach items="${tasks}" var="task">
-                <jsp:useBean id="task" scope="page" type="vn.todo.domain.Task"/>
-                <tr>
-                    <td><input type="checkbox" <c:if test="${task.complete}">checked</c:if> onclick="enable($(this), ${task.id})"/></td>
-                    <td>${task.title}</td>
-                    <td><a><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
-                    <td><a onclick="deleteRow(${task.todo.id}, ${task.id})"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
-                </tr>
-            </c:forEach>
         </table>
     </div>
 </div>

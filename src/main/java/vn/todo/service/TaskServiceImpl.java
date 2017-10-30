@@ -1,13 +1,13 @@
 package vn.todo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import vn.todo.domain.Task;
-import vn.todo.domain.User;
 import vn.todo.repository.TaskRepository;
+import vn.todo.to.TaskTo;
+import vn.todo.util.TaskUtil;
 import vn.todo.util.exceptions.NotFoundException;
 import java.util.List;
 import static vn.todo.util.ValidationUtil.checkNotFoundWithId;
@@ -25,6 +25,12 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Task update(Task task, int todoId) throws NotFoundException {
         return checkNotFoundWithId(repository.save(task, todoId), task.getId());
+    }
+
+    @Override
+    public Task update(TaskTo taskTo, int todoId) throws NotFoundException {
+        Task task = get(taskTo.getId(), todoId);
+        return checkNotFoundWithId(repository.save(TaskUtil.updateFromTo(task, taskTo), todoId), task.getId());
     }
 
     @Override

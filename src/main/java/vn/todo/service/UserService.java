@@ -1,6 +1,7 @@
 package vn.todo.service;
 
 import vn.todo.domain.User;
+import vn.todo.to.UserTo;
 import vn.todo.util.exceptions.NotFoundException;
 import java.util.List;
 
@@ -15,6 +16,8 @@ public interface UserService {
     User getByEmail(String email) throws NotFoundException;
 
     void update(User user);
+
+    void update(UserTo user);
 
     void evictCache();
 

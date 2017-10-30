@@ -1,8 +1,15 @@
 package vn.todo.web.task;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import vn.todo.domain.Task;
+import vn.todo.to.TaskTo;
+import vn.todo.util.TaskUtil;
+import vn.todo.util.Util;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,6 +23,12 @@ public class TaskAjaxController extends AbstractTaskController {
     }
 
     @Override
+    @GetMapping(value = "/{todoId}/{taskId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Task get(@PathVariable("todoId") int todoId, @PathVariable("taskId") int taskId) {
+        return super.get(taskId, todoId);
+    }
+
+    @Override
     @DeleteMapping(value = "/{todoId}/{taskId}")
     public void delete(@PathVariable("todoId") int todoId,
                        @PathVariable("taskId") int taskId) {
@@ -23,14 +36,17 @@ public class TaskAjaxController extends AbstractTaskController {
     }
 
     @PostMapping(value = "/{todoId}")
-    public void createOrUpdate(@PathVariable("todoId") Integer todoId,
-                               @RequestParam("id") Integer taskId,
-                               @RequestParam("title") String title,
-                               @RequestParam(value = "complete", defaultValue = "false") Boolean isComplete) {
-        Task task = new Task(taskId, title, isComplete);
-        if (task.isNew()) {
-            super.create(task, todoId);
+    public ResponseEntity<String> createOrUpdate(@PathVariable("todoId") Integer todoId,
+                               @Valid TaskTo taskTo, BindingResult result) {
+        if (result.hasErrors()) {
+            return new ResponseEntity<>(Util.getHttpErrorMessage(result), HttpStatus.UNPROCESSABLE_ENTITY);
         }
+        if (taskTo.isNew()) {
+            super.create(TaskUtil.createNewFromTo(taskTo), todoId);
+        } else {
+            super.update(taskTo, taskTo.getId(), todoId);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override

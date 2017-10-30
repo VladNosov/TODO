@@ -5,9 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import vn.todo.domain.Task;
 import vn.todo.service.TaskService;
+import vn.todo.to.TaskTo;
 import java.util.List;
-import static vn.todo.util.ValidationUtil.assureIdConsistent;
-import static vn.todo.util.ValidationUtil.checkNew;
+import static vn.todo.util.ValidationUtil.*;
 
 public abstract class AbstractTaskController {
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -36,10 +36,16 @@ public abstract class AbstractTaskController {
         return service.create(task, todoId);
     }
 
-    public void update(Task todo, int taskId, int todoId) {
-        log.info("update {} with id={} for todoId={}", todo, taskId, todoId);
-        assureIdConsistent(todo, taskId);
-        service.update(todo, todoId);
+    public void update(Task task, int taskId, int todoId) {
+        log.info("update {} with id={} for todoId={}", task, todoId);
+        assureIdConsistent(task, taskId);
+        service.update(task, todoId);
+    }
+
+    public void update(TaskTo taskTo, int taskId, int todoId) {
+        log.info("update {} with id={} for todoId={}", taskTo,todoId);
+        assureIdConsistent(taskTo, taskId);
+        service.update(taskTo, todoId);
     }
 
     public void complete(int todoId, int taskId, boolean enabled) {

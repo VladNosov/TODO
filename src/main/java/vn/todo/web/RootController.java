@@ -1,25 +1,12 @@
 package vn.todo.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vn.todo.AuthorizedUser;
-import vn.todo.service.TaskService;
-import vn.todo.service.TodoService;
-import vn.todo.service.UserService;
 
 @Controller
 public class RootController {
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private TodoService todoService;
-
-    @Autowired
-    private TaskService taskService;
 
     @GetMapping("/")
     public String root() {
@@ -27,8 +14,7 @@ public class RootController {
     }
 
     @GetMapping("/users")
-    public String users(Model model) {
-        model.addAttribute("users", userService.getAll());
+    public String users() {
         return "users";
     }
 
@@ -39,14 +25,12 @@ public class RootController {
     }
 
     @GetMapping("/todos")
-    public String todos(Model model) {
-        model.addAttribute("todos", todoService.getAll(AuthorizedUser.id()));
+    public String todos() {
         return "todos";
     }
 
     @GetMapping("/todo/{todoId}")
     public String todo(@PathVariable int todoId, Model model) {
-        model.addAttribute("tasks", taskService.getAll(todoId));
         return "tasks";
     }
 }

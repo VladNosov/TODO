@@ -25,14 +25,6 @@
                 <th></th>
             </tr>
             </thead>
-            <c:forEach items="${todos}" var="todo">
-                <jsp:useBean id="todo" scope="page" type="vn.todo.domain.Todo"/>
-                <tr>
-                    <td><a href="todo/${todo.id}/" class="navbar-brand tabl">${todo.title}</a></td>
-                    <td><a><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
-                    <td><a onclick="deleteRow(${todo.id})"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
-                </tr>
-            </c:forEach>
         </table>
     </div>
 </div>
@@ -49,17 +41,15 @@
                     <input type="hidden" id="id" name="id">
 
                     <div class="form-group">
-                        <label for="title" class="control-label col-xs-3"><spring:message
-                                code="todo.description"/></label>
+                        <label for="title" class="control-label col-xs-3"><spring:message code="todo.description"/></label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="title" name="title"
-                                   placeholder="<spring:message code="todo.description"/>">
+                            <input type="text" class="form-control" id="title" name="title" placeholder="<spring:message code="todo.description"/>">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button class="btn btn-primary" type="button" onclick="save()">
+                            <button type="button" onclick="save()" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                             </button>
                         </div>
