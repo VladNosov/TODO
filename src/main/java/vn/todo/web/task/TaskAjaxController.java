@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import vn.todo.domain.Task;
 import vn.todo.to.TaskTo;
 import vn.todo.util.TaskUtil;
-import vn.todo.util.Util;
+import vn.todo.util.ValidationUtil;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class TaskAjaxController extends AbstractTaskController {
     public ResponseEntity<String> createOrUpdate(@PathVariable("todoId") Integer todoId,
                                @Valid TaskTo taskTo, BindingResult result) {
         if (result.hasErrors()) {
-            return new ResponseEntity<>(Util.getHttpErrorMessage(result), HttpStatus.UNPROCESSABLE_ENTITY);
+            return ValidationUtil.getErrorResponse(result);
         }
         if (taskTo.isNew()) {
             super.create(TaskUtil.createNewFromTo(taskTo), todoId);

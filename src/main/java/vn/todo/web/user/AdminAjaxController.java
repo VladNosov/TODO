@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import vn.todo.domain.User;
 import vn.todo.to.UserTo;
 import vn.todo.util.UserUtil;
-import vn.todo.util.Util;
+import vn.todo.util.ValidationUtil;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -37,7 +37,7 @@ public class AdminAjaxController extends AbstractUserController {
     @PostMapping
     public ResponseEntity<String> createOrUpdate(@Valid UserTo userTo, BindingResult result) {
         if (result.hasErrors()) {
-            return new ResponseEntity<>(Util.getHttpErrorMessage(result), HttpStatus.UNPROCESSABLE_ENTITY);
+            return ValidationUtil.getErrorResponse(result);
         }
         if (userTo.isNew()) {
             super.create(UserUtil.createNewFromTo(userTo));

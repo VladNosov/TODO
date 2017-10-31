@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import vn.todo.domain.Todo;
 import vn.todo.to.TodoTo;
 import vn.todo.util.TodoUtil;
-import vn.todo.util.Util;
+import vn.todo.util.ValidationUtil;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -37,7 +37,7 @@ public class TodoAjaxController extends AbstractTodoController {
     @PostMapping
     public ResponseEntity<String> createOrUpdate(@Valid TodoTo todoTo, BindingResult result) {
         if (result.hasErrors()) {
-            return new ResponseEntity<>(Util.getHttpErrorMessage(result), HttpStatus.UNPROCESSABLE_ENTITY);
+            return ValidationUtil.getErrorResponse(result);
         }
         if (todoTo.isNew()) {
             super.create(TodoUtil.createNewFromTo(todoTo));

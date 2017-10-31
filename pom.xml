@@ -26,14 +26,17 @@
         <webjars-datetimepicker.version>2.5.4</webjars-datetimepicker.version>
         <webjars-noty.version>3.1.0</webjars-noty.version>
         <webjars-datatables.version>1.10.15</webjars-datatables.version>
+
+        <!-- Hibernate -->
+        <hibernate.validation.version>6.0.2.Final</hibernate.validation.version>
     </properties>
 
     <dependencies>
         <!-- security -->
-       <!-- <dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>-->
+        </dependency>
 
         <!-- DB -->
         <dependency>
@@ -45,6 +48,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate.validation.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.0.Final</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
