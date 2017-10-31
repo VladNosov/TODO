@@ -1,6 +1,6 @@
 package vn.todo.to;
 
-import org.hibernate.validator.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 
 public class TaskTo extends BaseTo {
     @NotBlank

@@ -2,7 +2,6 @@ package vn.todo.domain;
 
 import org.hibernate.Hibernate;
 import vn.todo.HasId;
-
 import javax.persistence.*;
 
 @MappedSuperclass

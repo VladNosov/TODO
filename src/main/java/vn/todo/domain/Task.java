@@ -1,7 +1,7 @@
 package vn.todo.domain;
 
-import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
