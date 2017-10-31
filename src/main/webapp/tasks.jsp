@@ -67,7 +67,6 @@
 </body>
 <jsp:include page="fragments/i18n.jsp"/>
 <script type="text/javascript">
-    var i18n = [];
     i18n["addTitle"] = '<spring:message code="task.add"/>';
     i18n["editTitle"] = '<spring:message code="task.edit"/>';
 </script>
