@@ -39,6 +39,7 @@ public class TaskAjaxController extends AbstractTaskController {
     public ResponseEntity<String> createOrUpdate(@PathVariable("todoId") Integer todoId,
                                @Valid TaskTo taskTo, BindingResult result) {
         if (result.hasErrors()) {
+            // TODO change to exception handler
             return ValidationUtil.getErrorResponse(result);
         }
         if (taskTo.isNew()) {

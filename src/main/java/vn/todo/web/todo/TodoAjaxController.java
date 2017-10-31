@@ -37,6 +37,7 @@ public class TodoAjaxController extends AbstractTodoController {
     @PostMapping
     public ResponseEntity<String> createOrUpdate(@Valid TodoTo todoTo, BindingResult result) {
         if (result.hasErrors()) {
+            // TODO change to exception handler
             return ValidationUtil.getErrorResponse(result);
         }
         if (todoTo.isNew()) {
