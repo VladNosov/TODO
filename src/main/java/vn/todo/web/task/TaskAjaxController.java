@@ -1,14 +1,11 @@
 package vn.todo.web.task;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import vn.todo.domain.Task;
 import vn.todo.to.TaskTo;
 import vn.todo.util.TaskUtil;
-import vn.todo.util.ValidationUtil;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -36,18 +33,13 @@ public class TaskAjaxController extends AbstractTaskController {
     }
 
     @PostMapping(value = "/{todoId}")
-    public ResponseEntity<String> createOrUpdate(@PathVariable("todoId") Integer todoId,
-                               @Valid TaskTo taskTo, BindingResult result) {
-        if (result.hasErrors()) {
-            // TODO change to exception handler
-            return ValidationUtil.getErrorResponse(result);
-        }
+    public void createOrUpdate(@PathVariable("todoId") Integer todoId,
+                                                 @Valid TaskTo taskTo, BindingResult result) {
         if (taskTo.isNew()) {
             super.create(TaskUtil.createNewFromTo(taskTo), todoId);
         } else {
             super.update(taskTo, taskTo.getId(), todoId);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override

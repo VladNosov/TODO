@@ -1,5 +1,6 @@
 package vn.todo.domain;
 
+import vn.todo.View;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -18,7 +19,7 @@ public class Task extends AbstractBaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "todo_id", nullable = false)
-    @NotNull
+    @NotNull(groups = View.Persist.class)
     private Todo todo;
 
     public Task() {

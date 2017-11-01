@@ -4,7 +4,7 @@
 
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
-<body onload="buildAjaxUrl()">
+<body>
 <script type="text/javascript" src="/js/datatablesUtil.js" defer></script>
 <script type="text/javascript" src="/js/taskDatatables.js" defer></script>
 <jsp:include page="fragments/bodyHeader.jsp"/>

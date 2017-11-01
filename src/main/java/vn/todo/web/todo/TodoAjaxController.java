@@ -1,14 +1,10 @@
 package vn.todo.web.todo;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import vn.todo.domain.Todo;
 import vn.todo.to.TodoTo;
 import vn.todo.util.TodoUtil;
-import vn.todo.util.ValidationUtil;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -35,16 +31,11 @@ public class TodoAjaxController extends AbstractTodoController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createOrUpdate(@Valid TodoTo todoTo, BindingResult result) {
-        if (result.hasErrors()) {
-            // TODO change to exception handler
-            return ValidationUtil.getErrorResponse(result);
-        }
+    public void createOrUpdate(@Valid TodoTo todoTo) {
         if (todoTo.isNew()) {
             super.create(TodoUtil.createNewFromTo(todoTo));
         } else {
             super.update(todoTo, todoTo.getId());
         }
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

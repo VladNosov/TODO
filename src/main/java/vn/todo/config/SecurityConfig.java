@@ -2,6 +2,7 @@ package vn.todo.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -10,6 +11,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import vn.todo.service.UserServiceImpl;
 import vn.todo.util.PasswordUtil;
 
@@ -21,28 +24,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("userService")
     private UserServiceImpl userService;
 
-    @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider(UserDetailsService userDetailsService){
-
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-        return daoAuthenticationProvider;
-    }
-
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(PasswordUtil.getPasswordEncoder());
     }
 
- /*   @Bean
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider(UserDetailsService userDetailsService){
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+        return daoAuthenticationProvider;
+    }
+
+    @Bean
     public FilterRegistrationBean securityFilterChainRegistration() {
         DelegatingFilterProxy delegatingFilterProxy = new DelegatingFilterProxy();
         delegatingFilterProxy.setTargetBeanName(AbstractSecurityWebApplicationInitializer.DEFAULT_FILTER_NAME);
         FilterRegistrationBean registration = new FilterRegistrationBean(delegatingFilterProxy);
-        registration.addUrlPatterns("*//*");
+        registration.addUrlPatterns("/*");
         registration.setName(AbstractSecurityWebApplicationInitializer.DEFAULT_FILTER_NAME);
         return registration;
-    }*/
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

@@ -30,6 +30,7 @@ function enable(chkbox, id) {
 }
 
 $(function () {
+    buildAjaxUrl();
     datatableApi = $("#datatable").DataTable({
         "ajax": {
             "url": ajaxUrl,
@@ -39,7 +40,7 @@ $(function () {
         "info": true,
         "columns": [
             {
-                "data": "complete",
+                "data": "isComplete",
                 "render": function (data, type, row) {
                     if (type === "display") {
                         return "<input type='checkbox' " + (data ? "checked" : "") + " onclick='enable($(this)," + row.id + ");'/>";

@@ -2,6 +2,7 @@ package vn.todo.domain;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import vn.todo.View;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.NotBlank;
@@ -17,7 +18,7 @@ public class Todo extends AbstractBaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @NotNull
+    @NotNull(groups = View.Persist.class)
     private User user;
 
     public Todo() {
