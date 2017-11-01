@@ -7,14 +7,10 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import vn.todo.web.interceptor.ModelInterceptor;
 import java.util.Locale;
 
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
-
-    @Autowired
-    ModelInterceptor modelInterceptor;
 
     @Autowired
     LocaleChangeInterceptor localeChangeInterceptor;
@@ -35,7 +31,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry){
-        registry.addInterceptor(modelInterceptor).addPathPatterns("/**");
         registry.addInterceptor(localeChangeInterceptor).addPathPatterns("/**");
     }
 }
