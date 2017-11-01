@@ -12,6 +12,7 @@ import vn.todo.to.UserTo;
 import vn.todo.util.UserUtil;
 import vn.todo.web.user.AbstractUserController;
 import javax.validation.Valid;
+import static vn.todo.web.ExceptionInfoHandler.EXCEPTION_DUPLICATE_EMAIL;
 
 @Controller
 public class RootController extends AbstractUserController {

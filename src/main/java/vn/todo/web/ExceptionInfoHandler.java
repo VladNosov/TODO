@@ -2,6 +2,7 @@ package vn.todo.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -15,6 +16,10 @@ import vn.todo.util.exceptions.ErrorInfo;
 import vn.todo.util.exceptions.ErrorType;
 import vn.todo.util.exceptions.NotFoundException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import static vn.todo.util.exceptions.ErrorType.*;
 
 @ControllerAdvice(annotations = RestController.class)
@@ -22,6 +27,18 @@ import static vn.todo.util.exceptions.ErrorType.*;
 @ResponseBody
 public class ExceptionInfoHandler {
     private static Logger log = LoggerFactory.getLogger(ExceptionInfoHandler.class);
+
+    public static final String EXCEPTION_DUPLICATE_EMAIL = "exception.user.duplicateEmail";
+
+    private static final Map<String, String> CONSTRAINS_I18N_MAP = Collections.unmodifiableMap(
+            new HashMap<String, String>() {
+                {
+                    put("users_unique_email_idx", EXCEPTION_DUPLICATE_EMAIL);
+                }
+            });
+
+    @Autowired
+    private MessageUtil messageUtil;
 
     //  http://stackoverflow.com/a/22358422/548473
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
@@ -33,6 +50,16 @@ public class ExceptionInfoHandler {
     @ResponseStatus(value = HttpStatus.CONFLICT)  // 409
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ErrorInfo conflict(HttpServletRequest req, DataIntegrityViolationException e) {
+        String rootMsg = ValidationUtil.getRootCause(e).getMessage();
+        if (rootMsg != null) {
+            String lowerCaseMsg = rootMsg.toLowerCase();
+            Optional<Map.Entry<String, String>> entry = CONSTRAINS_I18N_MAP.entrySet().stream()
+                    .filter(it -> lowerCaseMsg.contains(it.getKey()))
+                    .findAny();
+            if (entry.isPresent()) {
+                return logAndGetErrorInfo(req, e, false, DATA_ERROR, messageUtil.getMessage(entry.get().getValue()));
+            }
+        }
         return logAndGetErrorInfo(req, e, true, DATA_ERROR);
     }
 
