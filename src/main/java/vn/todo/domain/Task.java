@@ -1,5 +1,6 @@
 package vn.todo.domain;
 
+import org.hibernate.validator.constraints.SafeHtml;
 import vn.todo.View;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -11,11 +12,11 @@ public class Task extends AbstractBaseEntity {
 
     @Column(name = "title", nullable = false)
     @NotBlank
+    @SafeHtml(groups = {View.ValidatedRestUI.class})
     private String title;
 
     @Column(name = "complete", nullable = false, columnDefinition = "bool default false")
-    @NotNull
-    private Boolean isComplete;
+    private boolean isComplete = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "todo_id", nullable = false)
@@ -23,6 +24,10 @@ public class Task extends AbstractBaseEntity {
     private Todo todo;
 
     public Task() {
+    }
+
+    public Task(String title) {
+        this(title, false);
     }
 
     public Task(String title, boolean isComplete) {

@@ -1,11 +1,12 @@
 package vn.todo.web.user;
 
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import vn.todo.View;
 import vn.todo.domain.User;
 import vn.todo.to.UserTo;
 import vn.todo.util.UserUtil;
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -31,7 +32,7 @@ public class AdminAjaxController extends AbstractUserController {
     }
 
     @PostMapping
-    public void createOrUpdate(@Valid UserTo userTo) {
+    public void createOrUpdate(@Validated(View.ValidatedRestUI.class) UserTo userTo) {
         if (userTo.isNew()) {
             super.create(UserUtil.createNewFromTo(userTo));
         } else {

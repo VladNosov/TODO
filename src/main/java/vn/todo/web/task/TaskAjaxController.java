@@ -1,12 +1,12 @@
 package vn.todo.web.task;
 
 import org.springframework.http.MediaType;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import vn.todo.View;
 import vn.todo.domain.Task;
 import vn.todo.to.TaskTo;
 import vn.todo.util.TaskUtil;
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,7 +21,8 @@ public class TaskAjaxController extends AbstractTaskController {
 
     @Override
     @GetMapping(value = "/{todoId}/{taskId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Task get(@PathVariable("todoId") int todoId, @PathVariable("taskId") int taskId) {
+    public Task get(@PathVariable("todoId") int todoId,
+                    @PathVariable("taskId") int taskId) {
         return super.get(taskId, todoId);
     }
 
@@ -34,7 +35,7 @@ public class TaskAjaxController extends AbstractTaskController {
 
     @PostMapping(value = "/{todoId}")
     public void createOrUpdate(@PathVariable("todoId") Integer todoId,
-                                                 @Valid TaskTo taskTo, BindingResult result) {
+                               @Validated(View.ValidatedRestUI.class) TaskTo taskTo) {
         if (taskTo.isNew()) {
             super.create(TaskUtil.createNewFromTo(taskTo), todoId);
         } else {
@@ -44,7 +45,9 @@ public class TaskAjaxController extends AbstractTaskController {
 
     @Override
     @PostMapping(value = "/{todoId}/{taskId}")
-    public void complete(@PathVariable("todoId") int todoId, @PathVariable("taskId") int taskId, @RequestParam("enabled") boolean enabled) {
+    public void complete(@PathVariable("todoId") int todoId,
+                         @PathVariable("taskId") int taskId,
+                         @RequestParam("enabled") boolean enabled) {
         super.complete(todoId, taskId, enabled);
     }
 }

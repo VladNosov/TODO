@@ -1,11 +1,10 @@
 package vn.todo.web.todo;
 
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import vn.todo.View;
 import vn.todo.domain.Todo;
-import vn.todo.to.TodoTo;
-import vn.todo.util.TodoUtil;
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -31,11 +30,11 @@ public class TodoAjaxController extends AbstractTodoController {
     }
 
     @PostMapping
-    public void createOrUpdate(@Valid TodoTo todoTo) {
-        if (todoTo.isNew()) {
-            super.create(TodoUtil.createNewFromTo(todoTo));
+    public void createOrUpdate(@Validated(View.ValidatedRestUI.class) Todo todo) {
+        if (todo.isNew()) {
+            super.create(todo);
         } else {
-            super.update(todoTo, todoTo.getId());
+            super.update(todo, todo.getId());
         }
     }
 }

@@ -1,5 +1,7 @@
 package vn.todo.to;
 
+import org.hibernate.validator.constraints.SafeHtml;
+import vn.todo.View;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -9,10 +11,12 @@ public class UserTo extends BaseTo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotBlank
+    @SafeHtml(groups = {View.ValidatedRestUI.class})
     private String name;
 
     @Email
     @NotBlank
+    @SafeHtml(groups = {View.ValidatedRestUI.class})
     private String email;
 
     @Size(min = 5, max = 32, message = "length must between 5 and 32 characters")

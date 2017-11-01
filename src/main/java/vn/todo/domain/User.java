@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.util.CollectionUtils;
+import vn.todo.View;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.OrderBy;
@@ -23,6 +25,7 @@ public class User extends AbstractNamedEntity {
     @Column(name = "email", nullable = false, unique = true)
     @Email
     @NotBlank
+    @SafeHtml(groups = {View.ValidatedRestUI.class})
     private String email;
 
     @Column(name = "password", nullable = false)

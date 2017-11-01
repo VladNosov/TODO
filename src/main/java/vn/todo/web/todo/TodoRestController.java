@@ -2,11 +2,11 @@ package vn.todo.web.todo;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import vn.todo.View;
 import vn.todo.domain.Todo;
-import vn.todo.to.TodoTo;
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -35,12 +35,12 @@ public class TodoRestController extends AbstractTodoController {
 
     @Override
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@Valid @RequestBody TodoTo todoTo, @PathVariable("id") int id) {
-        super.update(todoTo, id);
+    public void update(@Validated(View.ValidatedRestUI.class) @RequestBody Todo todo, @PathVariable("id") int id) {
+        super.update(todo, id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Todo> createWithLocation(@Valid @RequestBody Todo meal) {
+    public ResponseEntity<Todo> createWithLocation(@Validated(View.ValidatedRestUI.class) @RequestBody Todo meal) {
         Todo created = super.create(meal);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()

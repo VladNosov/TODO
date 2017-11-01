@@ -2,6 +2,7 @@ package vn.todo.domain;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.validator.constraints.SafeHtml;
 import vn.todo.View;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,6 +14,7 @@ public class Todo extends AbstractBaseEntity {
 
     @Column(name = "title", nullable = false)
     @NotBlank
+    @SafeHtml(groups = {View.ValidatedRestUI.class})
     private String title;
 
     @ManyToOne(fetch = FetchType.LAZY)

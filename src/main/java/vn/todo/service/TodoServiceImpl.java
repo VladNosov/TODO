@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import vn.todo.domain.Todo;
 import vn.todo.repository.TodoRepository;
-import vn.todo.to.TodoTo;
-import vn.todo.util.TodoUtil;
 import vn.todo.util.exceptions.NotFoundException;
 import java.util.List;
 import static vn.todo.util.ValidationUtil.checkNotFoundWithId;
@@ -24,12 +22,6 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public Todo update(Todo todo, int userId) throws NotFoundException {
         return checkNotFoundWithId(repository.save(todo, userId), todo.getId());
-    }
-
-    @Override
-    public Todo update(TodoTo todoTo, int userId) throws NotFoundException {
-        Todo todo = get(todoTo.getId(), userId);
-        return checkNotFoundWithId(repository.save(TodoUtil.updateFromTo(todo, todoTo), userId), todo.getId());
     }
 
     @Override

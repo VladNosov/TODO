@@ -40,7 +40,6 @@
             <div class="modal-body">
                 <form class="form-horizontal" id="detailsForm">
                     <input type="hidden" id="id" name="id">
-                    <input type="hidden" id="complete" name="complete">
 
                     <div class="form-group">
                         <label for="title" class="control-label col-xs-3"><spring:message
