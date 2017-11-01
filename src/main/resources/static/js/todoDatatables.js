@@ -6,13 +6,7 @@ function updateTable() {
 }
 
 $(function () {
-    datatableApi = $("#datatable").DataTable({
-        "ajax": {
-            "url": ajaxUrl,
-            "dataSrc": ""
-        },
-        "paging": false,
-        "info": true,
+    datatableApi = $('#datatable').DataTable(extendsOpts({
         "columns": [
             {
                 "data": "title",
@@ -39,7 +33,6 @@ $(function () {
                 0,
                 "desc"
             ]
-        ],
-        "initComplete": makeEditable
-    });
+        ]
+    }));
 });

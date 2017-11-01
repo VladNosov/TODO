@@ -31,13 +31,7 @@ function enable(chkbox, id) {
 
 $(function () {
     buildAjaxUrl();
-    datatableApi = $("#datatable").DataTable({
-        "ajax": {
-            "url": ajaxUrl,
-            "dataSrc": ""
-        },
-        "paging": false,
-        "info": true,
+    datatableApi = $('#datatable').DataTable(extendsOpts({
         "columns": [
             {
                 "data": "isComplete",
@@ -67,7 +61,6 @@ $(function () {
                 0,
                 "desc"
             ]
-        ],
-        "initComplete": makeEditable
-    });
+        ]
+    }));
 });
