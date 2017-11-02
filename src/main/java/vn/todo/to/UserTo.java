@@ -16,6 +16,7 @@ public class UserTo extends BaseTo implements Serializable {
 
     @Email
     @NotBlank
+    @Size(max = 100)
     @SafeHtml(groups = {View.ValidatedRestUI.class})
     private String email;
 

@@ -7,6 +7,7 @@ import vn.todo.View;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "todos")
@@ -14,6 +15,7 @@ public class Todo extends AbstractBaseEntity {
 
     @Column(name = "title", nullable = false)
     @NotBlank
+    @Size(min = 2, max = 120)
     @SafeHtml(groups = {View.ValidatedRestUI.class})
     private String title;
 

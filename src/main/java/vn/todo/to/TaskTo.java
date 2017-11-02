@@ -3,9 +3,12 @@ package vn.todo.to;
 import org.hibernate.validator.constraints.SafeHtml;
 import vn.todo.View;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class TaskTo extends BaseTo {
+
     @NotBlank
+    @Size(min = 2, max = 120)
     @SafeHtml(groups = {View.ValidatedRestUI.class})
     private String title;
 
