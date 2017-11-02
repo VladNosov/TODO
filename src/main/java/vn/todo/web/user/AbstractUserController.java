@@ -3,11 +3,15 @@ package vn.todo.web.user;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import vn.todo.domain.AbstractBaseEntity;
 import vn.todo.domain.User;
 import vn.todo.service.UserService;
 import vn.todo.to.UserTo;
+import vn.todo.util.exceptions.ApplicationException;
 import java.util.List;
 import static vn.todo.util.ValidationUtil.*;
+import static vn.todo.util.exceptions.ApplicationException.EXCEPTION_MODIFICATION_RESTRICTION;
 
 public abstract class AbstractUserController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
@@ -33,18 +37,21 @@ public abstract class AbstractUserController {
 
     public void delete(int id) {
         log.info("delete {}", id);
+        checkModificationAllowed(id);
         service.delete(id);
     }
 
     public void update(User user, int id) {
         log.info("update {} with id={}", user, id);
         assureIdConsistent(user, id);
+        checkModificationAllowed(id);
         service.update(user);
     }
 
     public void update(UserTo userTo, int id) {
         log.info("update {} with id={}", userTo, id);
         assureIdConsistent(userTo, id);
+        checkModificationAllowed(id);
         service.update(userTo);
     }
 
@@ -55,6 +62,13 @@ public abstract class AbstractUserController {
 
     public void enable(int id, boolean enabled) {
         log.info((enabled ? "enable " : "disable ") + id);
+        checkModificationAllowed(id);
         service.enable(id, enabled);
+    }
+
+    private void checkModificationAllowed(int id) {
+        if (id < AbstractBaseEntity.START_SEQ + 2) {
+            throw new ApplicationException(EXCEPTION_MODIFICATION_RESTRICTION, HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS);
+        }
     }
 }

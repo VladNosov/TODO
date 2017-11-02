@@ -40,8 +40,8 @@ public class TodoRestController extends AbstractTodoController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Todo> createWithLocation(@Validated(View.ValidatedRestUI.class) @RequestBody Todo meal) {
-        Todo created = super.create(meal);
+    public ResponseEntity<Todo> createWithLocation(@Validated(View.ValidatedRestUI.class) @RequestBody Todo todo) {
+        Todo created = super.create(todo);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")

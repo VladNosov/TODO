@@ -13,7 +13,7 @@ import java.util.Locale;
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Autowired
-    LocaleChangeInterceptor localeChangeInterceptor;
+    private LocaleChangeInterceptor localeChangeInterceptor;
 
     @Bean("localeChangeInterceptor")
     public LocaleChangeInterceptor localeChangeInterceptor() {
