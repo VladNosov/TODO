@@ -66,7 +66,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .successForwardUrl("/todos")
                 .defaultSuccessUrl("/todos", true)
                 .and().logout().logoutSuccessUrl("/login");
-
-       // http.csrf().disable();
     }
 }

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 /**
  * <p>
  * Handling Hibernate lazy-loading
- *
  * @link https://github.com/FasterXML/jackson
  * @link https://github.com/FasterXML/jackson-datatype-hibernate
  * @link http://wiki.fasterxml.com/JacksonHowToCustomSerializers

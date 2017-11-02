@@ -5,7 +5,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import vn.todo.domain.User;
 import vn.todo.to.UserTo;
 import vn.todo.util.UserUtil;
-
 import static java.util.Objects.requireNonNull;
 
 public class AuthorizedUser extends org.springframework.security.core.userdetails.User {
