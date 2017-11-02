@@ -7,9 +7,7 @@ import org.springframework.core.env.Environment;
 
 @Configuration
 @ComponentScan
-@PropertySource({
-        "classpath:db/postgres.properties"
-})
+@PropertySource("classpath:db/${spring.profiles.active}.properties")
 public class JPAConfig {
 
     @Autowired
