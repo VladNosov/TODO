@@ -7,8 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static vn.todo.TestUtil.userAuth;
-import static vn.todo.UserTestData.ADMIN;
-import static vn.todo.UserTestData.USER;
+import static vn.todo.UserTestData.*;
 
 public class RootControllerTest extends AbstractControllerTest {
 
