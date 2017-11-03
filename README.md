@@ -2,7 +2,7 @@ TODO лист
 ===================
 Стек технологий:
 * Maven
-* Spring MVC
+* Spring Boot
 * Security
 * JPA(Hibernate)
 * REST(Jackson)
